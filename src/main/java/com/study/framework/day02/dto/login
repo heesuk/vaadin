@@ -1,0 +1,86 @@
+post /member : register
+post /member/{id} : change pssword
+delete /member/{id} : unregister
+post /member/login : login
+
+
+package com.study.framework.day02.page;
+
+import com.vaadin.navigator.View;
+import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.Page;
+import com.vaadin.server.VaadinSession;
+import com.vaadin.ui.*;
+import org.springframework.web.client.RestTemplate;
+import org.vaadin.risto.formsender.FormSender;
+
+public class LoginPage extends VerticalLayout implements View {
+    public static final String NAME = "";
+
+    public LoginPage() {
+        Panel panel = new Panel("Login");
+        panel.setSizeUndefined();
+        addComponent(panel);
+
+        TextField userId = new TextField("User Id");
+        PasswordField password = new PasswordField("password");
+
+//        final FormSender formSender = new FormSender();
+//        formSender.setFormMethod(FormSender.Method.POST);
+//
+        FormLayout formLayout = new FormLayout();
+        formLayout.addComponents(userId, password);
+//
+//        LoginForm loginForm = new LoginForm();
+//        loginForm.addLoginListener(new LoginForm.LoginListener() {
+//            private static final long serialVersionUID = -7672714513229340441L;
+//            public void onLogin(LoginForm.LoginEvent event) {
+//                formSender.addValue("name", (String) event.getLoginParameter("username"));
+//                formSender.addValue("password", event.getLoginParameter("password"));
+//                formSender.submit();
+//            }
+//        });
+
+        Button loginBtn = new Button("로그인");
+        loginBtn.addClickListener(new Button.ClickListener() {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void buttonClick(Button.ClickEvent event) {
+//                RestTemplate restTemplate = new RestTemplate();
+//                String test = restTemplate.postForObject("/member/login", null, String.class);
+//                String test = restTemplate.getForObject("/member/login", String .class);
+
+                /*if(VaadinloginUI.AUTH.authenticate(userId.getValue(), password.getValue())){
+                    VaadinSession.getCurrent().setAttribute("user", userId.getValue());
+                    getUI().getNavigator().addView(SecurePage.NAME, SecurePage.class);
+                    getUI().getNavigator().addView(OtherSecurePage.NAME, OtherSecurePage.class);
+                    Page.getCurrent().setUriFragment("!"+SecurePage.NAME);
+                }else{*/
+//                    Notification.show("Invalid credentials", Notification.Type.ERROR_MESSAGE);
+//                Notification.show(test, Notification.Type.ERROR_MESSAGE);
+//                }
+                getUI().getNavigator().navigateTo(RegisterPage.NAME);
+            }
+        });
+
+        Button registerBtn = new Button("가입");
+        registerBtn.addClickListener(e->Notification.show("Hi! " + userId.getValue()) );
+
+        HorizontalLayout horizontalLayout = new HorizontalLayout();
+        horizontalLayout.addComponents(registerBtn, loginBtn);
+
+        formLayout.addComponent(horizontalLayout);
+//        formLayout.addComponent(loginForm);
+
+        formLayout.setSizeUndefined();
+        formLayout.setMargin(true);
+        panel.setContent(formLayout);
+        setComponentAlignment(panel, Alignment.MIDDLE_CENTER);
+
+    }
+    @Override
+    public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
+
+    }
+}

@@ -36,6 +36,15 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.vaadin.addons/loginform -->
+		<dependency>
+			<groupId>org.vaadin.addons</groupId>
+			<artifactId>loginform</artifactId>
+			<version>0.6.2</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<dependencyManagement>
